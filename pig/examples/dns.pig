@@ -3,6 +3,8 @@ RUN $includepath;
 
 %DEFAULT dnspath 'lib/scripts/dns_parser.py'
 
+register '$dnspath'
+
 dns = LOAD '$pcap' USING com.packetloop.packetpig.loaders.pcap.protocol.DNSConversationLoader('$dnspath') AS (
 	ts:long,
 	id:long,
@@ -12,6 +14,6 @@ dns = LOAD '$pcap' USING com.packetloop.packetpig.loaders.pcap.protocol.DNSConve
 	ttl:int
 );
 
-DUMP dns;
---STORE dns INTO '$output/dns' USING PigStorage(',');
+--DUMP dns;
+STORE dns INTO '$output/dns' USING PigStorage(',');
 
